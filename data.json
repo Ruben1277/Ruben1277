@@ -1,0 +1,1 @@
+{"balance": 3.0, "history": [{"type": "deposit", "value": 1.0}, {"type": "deposit", "value": 2.0}, {"type": "deposit", "value": 1.0}, {"type": "expense", "value": 1.0, "category": "bb"}]}
