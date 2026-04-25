@@ -17,17 +17,21 @@ def save_data(database):
         json.dump(database , file)
 
 def get_input(prompt):
-    value = input(prompt).strip().lower()
-
-    return value
+    while True:
+        
+        value = input(prompt).strip().lower()
+        if value == 'cancel':
+            if cancel('You are canceling this action ') ==True:
+                return True
+            else:
+                continue
+        return value
 def deposit(database):
     value = 0
     while True:
         value = get_number(float)
-        if value == 'cancel':
-            is_canceled = cancel('You are canceling the action')
-            if is_canceled == True:
-                return
+        if value == True:
+            return
         if value > 0 :
             break
         else:
@@ -41,10 +45,9 @@ def expenses_register(database):
     value = 0
     while True:
         value = get_number(float)
-        if value == 'cancel':
-            is_canceled = cancel('You are canceling the action')
-            if is_canceled == True:
-                return
+        if value == True:
+            return
+        
         if value <= 0 :
             print("Value must be greater than 0: ")
         elif value > database['balance']:
@@ -53,7 +56,7 @@ def expenses_register(database):
             break 
     while True:
         category = get_input("type of expense or |cancel| to cancel: ")
-        if category is None:
+        if category == True:
             print("Action canceled")
             return
         if not category.isalpha():
@@ -67,19 +70,15 @@ def delete_transaction(database):
     while True:
         try:
             index = get_number(int) 
-            if index == 'cancel':
-                is_canceled = cancel('You are canceling the action')
-                if is_canceled == True:
-                    return
-            index = int(index)
+            if index == True:
+                return        
             if 0 <= index < len(database['history']):
                 break
             else:
                 print("Invalid index ")
         except ValueError:
-            print("Write a valid number")
-            
-            
+            print("Write a valid number")            
+
        
     transaction = database['history'][index]
     wanna_cancel = cancel(f"Transaction : {transaction} Index : {index}") 
@@ -97,10 +96,10 @@ def show_expense_search_type(database):
     while True:
         
             search_type = get_input("Write an expense type or |cancel| to cancel: ")
-            if search_type == 'cancel':
-                is_canceled = cancel('You are canceling the action')
-                if is_canceled == True:
-                    return
+           # if search_type == 'cancel':
+              #  is_canceled = cancel('You are canceling the action')
+               # if is_canceled == True:
+                 #   return
             if not search_type.isalpha():
                 print("Digit a valid value")
                 continue
@@ -152,9 +151,13 @@ def get_number(t : type):
         try:
             value = input('Write a number or |cancel| to cancel: ').strip()
             if value == 'cancel':
-                return value
-            else:
-                return t(value)
+                if cancel('You are canceling this action ') == True:
+                    return True
+                else:
+                    continue
+
+                
+            return t(value)
         except ValueError:
             print("Invalid Number")
            
