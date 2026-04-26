@@ -1,13 +1,13 @@
 ﻿# Finance Management CLI(comand line interface)
  Simple finance management system made with Python(CLI)
  ## Features
- -add deposites
+ -add deposits
  -add expenses with category
  -delete transactions
  -history of transactions
  -filter expenses by category
  -show your total balance
- ## Tecnologies
+ ## Technologies
  -Python
  -Json (data storage)
  ## How to run
